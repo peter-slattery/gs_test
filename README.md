@@ -11,18 +11,31 @@ Test executables can be run individually or via `run_all_tests.sh` which is outp
 Both tests and `run_all_tests.sh` have the same options:
 
 `-colors`: output colored information for easier readability
+
 `-verbose`: by default the output will only show test suites run, and full information on errors. Enabling verbose output indicates all tests that are run as well.
 
 ## Test Harness Reference
 
-`Init_Test_Harness(suite_name: string)`: Call at the beginning of your test suite function to initialize the test suite.
-`Run_Test_Harness()`: Call at the end of your test suite function to execute all tests
-`Before_Each(#type () -> ())`: Define a function that will be run before each test
-`After_Each(#type () -> ())`: Define a funciton that will be run after each test
-`Test(test_name: string, test_proc: #type () -> ())`: Define a single test function
+`Init_Test_Harness(suite_name: string)`:
+Call at the beginning of your test suite function to initialize the test suite.
 
-`expect(received, expected)`: Checks for equality between the two values. Equivalent to `if (received != expected) report_test_failure()`
+`Run_Test_Harness()`:
+Call at the end of your test suite function to execute all tests
+
+`Before_Each(#type () -> ())`:
+Define a function that will be run before each test
+
+`After_Each(#type () -> ())`:
+Define a funciton that will be run after each test
+
+`Test(test_name: string, test_proc: #type () -> ())`:
+Define a single test function
+
+`expect(received, expected)`:
+Checks for equality between the two values. Equivalent to `if (received != expected) report_test_failure()`
+
 `expect_true(value)`
+
 `expect_false(value)`
 
 ## How It Works
