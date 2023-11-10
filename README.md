@@ -84,16 +84,3 @@ main :: () {
 
 Because of the way Jai handles imports, we have to either have a single test executable which runs all your tests, or make an executable per test file. In the former case, we'd be forced to do a bunch of complicated things to deduplicate #load
 calls in the cases where you have separate tests importing the same files. This solution seemed simpler - you define your tests how you want, and for each file, just import what that test requires. I may revist this in the future.
-
-## Goals
-
-1. Simply import the test framework into your build pipeline, pass compiler messages to it, and get tests out.
-2. Easily write tests, and get useful failure information back out.
-3. Reasonable Defaults:
-  - creates a single test executable next to your output
-  - runs all tests, returning failure codes on exit
-  - tests can be placed in *.test.jai files or inline with @test tags.
-4. Customization
-  - name the output file
-  - define the pattern for test files (ie. instead of *.test.jai, use something else)
-  - define the test tag (ie. instead of @test, use something else)
