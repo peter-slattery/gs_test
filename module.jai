@@ -140,9 +140,21 @@ output :: ()
     print_to_builder(*run_all_tests_builder, "\n# Category: %\n", category.category_name);
     if category.category_name != "default"
     {
-      print_to_builder(*run_all_tests_builder, "if [[ \" ${ARGS[*]} \" =~ \" % \" ]]; then\n", category.category_name);
+      RUN_CONDITION :: "if [[ \" ${ARGS[*]} \" =~ \" % \" ]] || [[ \" ${ARGS[*]} \" =~ \" all \" ]]; then\n";
+      print_to_builder(*run_all_tests_builder, RUN_CONDITION, category.category_name);
     }
-    print_to_builder(*run_all_tests_builder, "%\n", builder_to_string(category_builder));
+
+    category_tests_string := builder_to_string(category_builder);
+    if category_tests_string.count > 0 {
+      print_to_builder(*run_all_tests_builder, "%\n", category_tests_string);
+    } else {
+      print_to_builder(
+        *run_all_tests_builder,
+        "echo No tests in this category: %\n",
+        category.category_name
+      );
+    }
+
     if category.category_name != "default"
     {
       print_to_builder(*run_all_tests_builder, "fi\n");
